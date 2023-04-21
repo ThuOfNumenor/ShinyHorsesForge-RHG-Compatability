@@ -35,8 +35,11 @@ public class ShinyHorsesMod {
 	}
 
 	public static void checkHorseHook(Enchantment enchantmentIn, LivingEntity entityIn, CallbackInfoReturnable<Integer> cir) {
-		if (entityIn instanceof Horse) {
-			ItemStack armor = ((Horse) entityIn).getArmor();
+		if (entityIn instanceof Horse || entityIn instanceOf HorseGeneticEntity) {
+			ItemStack armor = null;
+			if (entityIn instanceof Horse) {armor = ((Horse) entityIn).getArmor();}
+			else {armor = ((HorseGeneticEntity) entityIn).getArmor();}
+			//ItemStack armor = ((Horse) entityIn).getArmor();
 			if (armor.getItem() instanceof HorseArmorItem) {
 				int level = ((HorseArmorItem) armor.getItem()).getEnchantmentLevel(armor, enchantmentIn);
 				cir.setReturnValue(level);
